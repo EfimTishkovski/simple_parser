@@ -19,9 +19,26 @@ def get_html(url, headers):
 # Функция получения нужного контента со страницы
 def get_content_bel_b(html):
     page_data = BeautifulSoup(html, 'html.parser')
-    print(page_data)
+    items = page_data.find_all('div', class_='home-page-block home-page-block--sm home-page-block--white home-page-block--bg-7 col-lg-3 col-md-4 col-sm-6 col-2xs-12')
+    rez = {}
+    temp = []
+    # поиск значений названий валют и курсов
+    for element in items:
+        currency = element.find_all_next('td', class_='currency-table__cell-curr')
+        value = element.find_all_next('td', class_='currency-table__cell-value')
+    # Добавление названий в выходной словарь
+    for line in currency:
+        curr_name = line.text.strip().replace('\n', '')
+        rez[curr_name] = ''
+    # Добавление значений соответствующим валютам в выходной словарь
+    for line in value:
+        temp.append(line.text.strip().replace('\n', ''))
+    rez['1 доллар США'] = (temp[0], temp[1])
+    rez['1 евро'] = (temp[2], temp[3])
+    rez['100 российских рублей'] = (temp[4], temp[5])
+    return rez
 
 
-print(get_html(url_bel_b, headers_bel_b))
-html_bel_b = get_html(url_bel_b, headers_bel_b)
-print(get_content_bel_b(html_bel_b.text))
+#print(get_html(url_bel_b, headers_bel_b))
+#html_bel_b = get_html(url_bel_b, headers_bel_b)
+#print(get_content_bel_b(html_bel_b.text))
