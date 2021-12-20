@@ -16,6 +16,7 @@ headers_tb = {
     }
 
 # Запросы на сайт банков
+
 answer_bel_b = get_html(url_bel_b, headers_bel_b)
 answer_tb = get_html(url_tb, headers_tb)
 

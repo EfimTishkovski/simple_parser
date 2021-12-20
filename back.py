@@ -49,6 +49,7 @@ def get_content_tb(html):
         currency = element.find_all_next('span', class_='currency-media-body media-body')
         value = element.find_all_next('span', class_='currency-media-new-curr')
     # Сортировка данных
+
     for line_val in value:
         temp.append(line_val.text)
 
