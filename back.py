@@ -16,7 +16,7 @@ def get_html(url, headers):
     out = requests.get(url, headers=headers)
     return out
 
-# Функция получения нужного контента со страницы
+# Функция получения нужного контента со страницы беларусбанк
 def get_content_bel_b(html):
     page_data = BeautifulSoup(html, 'html.parser')
     items = page_data.find_all('div', class_='home-page-block home-page-block--sm home-page-block--white home-page-block--bg-7 col-lg-3 col-md-4 col-sm-6 col-2xs-12')
@@ -38,7 +38,25 @@ def get_content_bel_b(html):
     rez['100 российских рублей'] = (temp[4], temp[5])
     return rez
 
+# Функция получения нужного контента со страницы технобанк
+def get_content_tb(html):
+    page_data = BeautifulSoup(html, 'html.parser')
+    items = page_data.find_all('div', class_='row row-md-bordered tab-content')
+    temp = []
+    rez = {}
+    # Получение данных
+    for element in items:
+        currency = element.find_all_next('span', class_='currency-media-body media-body')
+        value = element.find_all_next('span', class_='currency-media-new-curr')
+    # Сортировка данных
+    for line_val in value:
+        temp.append(line_val.text)
 
-#print(get_html(url_bel_b, headers_bel_b))
-#html_bel_b = get_html(url_bel_b, headers_bel_b)
-#print(get_content_bel_b(html_bel_b.text))
+    for line in currency:
+        rez[line.text] = ''
+    # Добавление значений соответствующим валютам в выходной словарь
+    rez['RUB'] = (temp[0], temp[1])
+    rez['USD'] = (temp[2], temp[3])
+    rez['EUR'] = (temp[4], temp[5])
+    return rez
+
