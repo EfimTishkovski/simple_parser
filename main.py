@@ -2,6 +2,7 @@ from back import *
 
 url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Беларусбанка
 url_tb = 'https://tb.by/individuals/' # Ссылка на сайт Технобанка
+url_nb = 'https://www.nbrb.by/'       # Ссылка на вайт нацбанка
 
 # Заголовки необходимые для корректного доступа на сайт
 headers_bel_b = {
@@ -19,14 +20,21 @@ headers_tb = {
 
 answer_bel_b = get_html(url_bel_b, headers_bel_b)
 answer_tb = get_html(url_tb, headers_tb)
+answer_nb = get_html(url_nb, '')
+
 
 if answer_bel_b.status_code == 200:
-    print(get_content_bel_b(answer_bel_b.text))
+    print('Беларусбанк', get_content_bel_b(answer_bel_b.text))
 else:
     print('Беларусбанк: ошибка получения данных')
 
 if answer_tb.status_code == 200:
-    print(get_content_tb(answer_tb.text))
+    print('Технобанк', get_content_tb(answer_tb.text))
 else:
     print('Технобанк: ошибка получения данных')
 
+
+if answer_nb.status_code == 200:
+    print('Нацбанк', get_content_nb(answer_nb.text))
+else:
+    print('Нацбанк: ошибка получения данных')

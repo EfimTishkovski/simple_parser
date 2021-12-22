@@ -62,5 +62,20 @@ def get_content_tb(html):
     return rez
 # Функция получения данных с сайта НБ
 def get_content_nb(html):
-    pass
+    page_data = BeautifulSoup(html, 'html.parser')
+    items = page_data.find_all('dl', class_='js-stats-item', id='p4')
+    out = []
+    rez = {}
+    for element in items:
+        temp = element.text.strip().split('\n')
+    for elem in temp:
+        if elem != '':
+            out.append(elem.strip())
+
+    rez[out[4]] = (out[5], out[6])
+    rez[out[7]] = (out[8], out[9])
+    rez[out[10]] = (out[11], out[12])
+
+    return rez
+
 
