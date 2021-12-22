@@ -60,4 +60,7 @@ def get_content_tb(html):
     rez['USD'] = (temp[2], temp[3])
     rez['EUR'] = (temp[4], temp[5])
     return rez
+# Функция получения данных с сайта НБ
+def get_content_nb(html):
+    pass
 
