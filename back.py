@@ -56,9 +56,9 @@ def get_content_tb(html):
     for line in currency:
         rez[line.text] = ''
     # Добавление значений соответствующим валютам в выходной словарь
-    rez['RUB'] = (temp[0], temp[1])
     rez['USD'] = (temp[2], temp[3])
     rez['EUR'] = (temp[4], temp[5])
+    rez['RUB'] = (temp[0], temp[1])
     return rez
 # Функция получения данных с сайта НБ
 def get_content_nb(html):
