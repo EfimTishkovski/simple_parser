@@ -1,5 +1,22 @@
 from back import *
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.uic import loadUi
+import sys
 
+class Main_window(QWidget):
+    def __init__(self):
+        super(Main_window, self).__init__()
+        loadUi('Form.ui', self)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = Main_window()
+    window.show()
+    sys.exit(app.exec_())
+
+
+"""
 url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Беларусбанка
 url_tb = 'https://tb.by/individuals/' # Ссылка на сайт Технобанка
 url_nb = 'https://www.nbrb.by/'       # Ссылка на вайт нацбанка
@@ -38,3 +55,4 @@ if answer_nb.status_code == 200:
     print('Нацбанк', get_content_nb(answer_nb.text))
 else:
     print('Нацбанк: ошибка получения данных')
+"""
