@@ -72,8 +72,8 @@ def get_content_nb(html):
         if elem != '':
             out.append(elem.strip())
 
-    rez[out[4]] = (out[5], out[6])
     rez[out[7]] = (out[8], out[9])
+    rez[out[4]] = (out[5], out[6])
     rez[out[10]] = (out[11], out[12])
 
     return rez

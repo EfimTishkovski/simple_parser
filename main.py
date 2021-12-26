@@ -1,22 +1,9 @@
 from back import *
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtWidgets import QWidget, QApplication, QComboBox
 from PyQt5.uic import loadUi
 import sys
 
-class Main_window(QWidget):
-    def __init__(self):
-        super(Main_window, self).__init__()
-        loadUi('Form.ui', self)
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = Main_window()
-    window.show()
-    sys.exit(app.exec_())
-
-
-"""
 url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Беларусбанка
 url_tb = 'https://tb.by/individuals/' # Ссылка на сайт Технобанка
 url_nb = 'https://www.nbrb.by/'       # Ссылка на вайт нацбанка
@@ -33,26 +20,77 @@ headers_tb = {
     'user-agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
     }
 
-# Запросы на сайт банков
+class Main_window(QWidget):
+    # Функция отображения данных в окошке программы
+    def show_data(self):
+        try:
+            enable_bank = self.comboBox.currentText()
+            # Получение и отображение данных от Беларусбанка
+            if enable_bank == 'Беларусбанк':
+                answer_bel_b = get_html(url_bel_b, headers_bel_b)
+                if answer_bel_b.status_code == 200:
+                    course_data = get_content_bel_b(answer_bel_b.text)
+                    # Отображение курса доллара
+                    self.usd_buy.setText(course_data['1 доллар США'][0])
+                    self.usd_sale.setText(course_data['1 доллар США'][1])
+                    # Отображение курса евро
+                    self.euro_buy.setText(course_data['1 евро'][0])
+                    self.euro_sale.setText(course_data['1 евро'][1])
+                    # Отображение курса российского рубля
+                    self.rub_buy.setText(course_data['100 российских рублей'][0])
+                    self.rub_sale.setText(course_data['100 российских рублей'][1])
+                    self.messege_label.setText('Готово(Беларусбанк)')
+                else:
+                    self.messege_label.setText('Ошибка')
 
-answer_bel_b = get_html(url_bel_b, headers_bel_b)
-answer_tb = get_html(url_tb, headers_tb)
-answer_nb = get_html(url_nb, '')
+            # Получение и отображение данных от Технобанка
+            if enable_bank == 'Технобанк':
+                answer_tb = get_html(url_tb, headers_tb)
+                if answer_tb.status_code == 200:
+                    course_data = get_content_tb(answer_tb.text)
+                    # Отображение курса доллара
+                    self.usd_buy.setText(course_data['USD'][0])
+                    self.usd_sale.setText(course_data['USD'][1])
+                    # Отображение курса евро
+                    self.euro_buy.setText(course_data['EUR'][0])
+                    self.euro_sale.setText(course_data['EUR'][1])
+                    # Отображение курса российского рубля
+                    self.rub_buy.setText(course_data['RUB'][0])
+                    self.rub_sale.setText(course_data['RUB'][1])
+                    self.messege_label.setText('Готово (Технобанк)')
+                else:
+                    self.messege_label.setText('Ошибка')
+
+            # Получение и отображение данных от Нацбанка
+            if enable_bank == 'Национальный банк РБ':
+                answer_nb = get_html(url_nb, headers='')
+                if answer_nb.status_code == 200:
+                    course_data = get_content_nb(answer_nb.text)
+                    # Отображение курса доллара
+                    self.usd_buy.setText(course_data['USD 1 Доллар США'][0])
+                    self.usd_sale.setText(course_data['USD 1 Доллар США'][1])
+                    # Отображение курса евро
+                    self.euro_buy.setText(course_data['EUR 1 Евро'][0])
+                    self.euro_sale.setText(course_data['EUR 1 Евро'][1])
+                    # Отображение курса российского рубля
+                    self.rub_buy.setText(course_data['RUB 100 Российских рублей'][0])
+                    self.rub_sale.setText(course_data['RUB 100 Российских рублей'][1])
+                    self.messege_label.setText('Готово (Нацбанк)')
+                else:
+                    self.messege_label.setText('Ошибка')
+        except:
+            self.messege_label.setText('Ошибка')
+    def __init__(self):
+        super(Main_window, self).__init__()
+        loadUi('Form.ui', self)
+
+        self.messege_label.setText('')                         # Сброс сообщения при запуске
+        self.show_data()                                       # Получение первойстроки комбобокса
+        self.comboBox.activated[str].connect(self.show_data)   # Обработка сигнала смены строки комбовокса
 
 
-if answer_bel_b.status_code == 200:
-    print('Беларусбанк', get_content_bel_b(answer_bel_b.text))
-else:
-    print('Беларусбанк: ошибка получения данных')
-
-if answer_tb.status_code == 200:
-    print('Технобанк', get_content_tb(answer_tb.text))
-else:
-    print('Технобанк: ошибка получения данных')
-
-
-if answer_nb.status_code == 200:
-    print('Нацбанк', get_content_nb(answer_nb.text))
-else:
-    print('Нацбанк: ошибка получения данных')
-"""
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = Main_window()
+    window.show()
+    sys.exit(app.exec_())

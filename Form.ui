@@ -113,7 +113,7 @@ background-color: rgb(216, 252, 255);</string>
     <string>Продажа</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="usd_buy">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -129,7 +129,7 @@ background-color: rgb(216, 252, 255);</string>
     <string>0</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
+  <widget class="QLabel" name="usd_sale">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -157,6 +157,12 @@ background-color: rgb(216, 252, 255);</string>
    <property name="styleSheet">
     <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="currentText">
+    <string notr="true">Беларусбанк</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
    </property>
    <item>
     <property name="text">
@@ -190,7 +196,7 @@ background-color: rgb(255, 255, 255);</string>
     <string>Банк</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="refresh_button">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -219,7 +225,7 @@ background-color: rgb(255, 255, 255);</string>
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
+  <widget class="QLabel" name="euro_buy">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -235,7 +241,7 @@ background-color: rgb(255, 255, 255);</string>
     <string>0</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_10">
+  <widget class="QLabel" name="euro_sale">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -251,7 +257,7 @@ background-color: rgb(255, 255, 255);</string>
     <string>0</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_11">
+  <widget class="QLabel" name="rub_buy">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -267,7 +273,7 @@ background-color: rgb(255, 255, 255);</string>
     <string>0</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_12">
+  <widget class="QLabel" name="rub_sale">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -331,12 +337,12 @@ background-color: rgb(255, 255, 255);</string>
     <pixmap>EuropeanUnion.png</pixmap>
    </property>
   </widget>
-  <widget class="QLabel" name="label_16">
+  <widget class="QLabel" name="messege_label">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>300</x>
      <y>270</y>
-     <width>91</width>
+     <width>191</width>
      <height>21</height>
     </rect>
    </property>
@@ -344,7 +350,7 @@ background-color: rgb(255, 255, 255);</string>
     <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="text">
-    <string>Сообщение</string>
+    <string>статус(название банка)</string>
    </property>
   </widget>
  </widget>
