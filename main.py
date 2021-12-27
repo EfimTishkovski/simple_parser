@@ -1,5 +1,5 @@
 from back import *
-from PyQt5.QtWidgets import QWidget, QApplication, QComboBox
+from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.uic import loadUi
 import sys
 
