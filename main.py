@@ -86,7 +86,8 @@ class Main_window(QWidget):
 
         self.messege_label.setText('')                         # Сброс сообщения при запуске
         self.show_data()                                       # Получение первойстроки комбобокса
-        self.comboBox.activated[str].connect(self.show_data)   # Обработка сигнала смены строки комбовокса
+        self.comboBox.activated[str].connect(self.show_data)   # Обработка сигнала смены строки комбобокса
+        self.refresh_button.clicked.connect(self.show_data)    # Обработчик кнопки "обновить"
 
 
 if __name__ == '__main__':
