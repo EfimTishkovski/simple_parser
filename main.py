@@ -1,5 +1,4 @@
 from back import *
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QApplication, QComboBox
 from PyQt5.uic import loadUi
 import sys
@@ -88,7 +87,6 @@ class Main_window(QWidget):
         self.show_data()                                       # Получение первойстроки комбобокса
         self.comboBox.activated[str].connect(self.show_data)   # Обработка сигнала смены строки комбобокса
         self.refresh_button.clicked.connect(self.show_data)    # Обработчик кнопки "обновить"
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -2,7 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup
-
+"""
 url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Беларусьбанка
 
 # Заголовки необходимые для корректного доступа на сайт
@@ -10,7 +10,7 @@ headers_bel_b = {
     'accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
     'user-agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36'
     }
-
+"""
 # Функция доступа к странице
 def get_html(url, headers):
     out = requests.get(url, headers=headers)
@@ -49,7 +49,6 @@ def get_content_tb(html):
         currency = element.find_all_next('span', class_='currency-media-body media-body')
         value = element.find_all_next('span', class_='currency-media-new-curr')
     # Сортировка данных
-
     for line_val in value:
         temp.append(line_val.text)
 
@@ -77,5 +76,3 @@ def get_content_nb(html):
     rez[out[10]] = (out[11], out[12])
 
     return rez
-
-
