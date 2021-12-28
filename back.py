@@ -70,9 +70,14 @@ def get_content_nb(html):
     for elem in temp:
         if elem != '':
             out.append(elem.strip())
-
-    rez[out[7]] = (out[8], out[9])
-    rez[out[4]] = (out[5], out[6])
-    rez[out[10]] = (out[11], out[12])
+    # Правочка для более стабильной работы
+    # Поиск индексов по названиям валют
+    index_usd = out.index('USD 1 Доллар США')
+    index_euro = out.index('EUR 1 Евро')
+    index_rub = out.index('RUB 100 Российских рублей')
+    # Заполнение словаря данными
+    rez[out[index_usd]] = (out[index_usd + 1], out[index_usd + 2])
+    rez[out[index_euro]] = (out[index_euro + 1], out[index_euro + 2])
+    rez[out[index_rub]] = (out[index_rub + 1], out[index_rub + 2])
 
     return rez
