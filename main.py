@@ -7,6 +7,8 @@ url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Белару�
 url_tb = 'https://tb.by/individuals/' # Ссылка на сайт Технобанка
 url_nb = 'https://www.nbrb.by/'       # Ссылка на вайт нацбанка
 
+# Новый комментарий
+
 # Заголовки необходимые для корректного доступа на сайт
 headers_bel_b = {
     'accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
