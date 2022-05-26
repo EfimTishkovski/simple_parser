@@ -31,6 +31,8 @@ class Main_window(QWidget):
                 answer_bel_b = get_html(url_bel_b, headers_bel_b)
                 if answer_bel_b.status_code == 200:
                     course_data = get_content_bel_b(answer_bel_b.text)
+                    self.buy.setText('Покупка')
+                    self.sale.setText('Продажа')
                     # Отображение курса доллара
                     self.usd_buy.setText(course_data['1 доллар США'][0])
                     self.usd_sale.setText(course_data['1 доллар США'][1])
@@ -49,6 +51,8 @@ class Main_window(QWidget):
                 answer_tb = get_html(url_tb, headers_tb)
                 if answer_tb.status_code == 200:
                     course_data = get_content_tb(answer_tb.text)
+                    self.buy.setText('Покупка')
+                    self.sale.setText('Продажа')
                     # Отображение курса доллара
                     self.usd_buy.setText(course_data['USD'][0])
                     self.usd_sale.setText(course_data['USD'][1])
@@ -67,6 +71,8 @@ class Main_window(QWidget):
                 answer_nb = get_html(url_nb, headers='')
                 if answer_nb.status_code == 200:
                     course_data = get_content_nb(answer_nb.text)
+                    self.buy.setText(course_data['today'])
+                    self.sale.setText(course_data['tomorrow'])
                     # Отображение курса доллара
                     self.usd_buy.setText(course_data['USD 1 Доллар США'][0])
                     self.usd_sale.setText(course_data['USD 1 Доллар США'][1])

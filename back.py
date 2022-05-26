@@ -2,6 +2,8 @@
 
 import requests
 from bs4 import BeautifulSoup
+import re
+
 """
 url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Беларусьбанка
 
@@ -79,5 +81,10 @@ def get_content_nb(html):
     rez[out[index_usd]] = (out[index_usd + 1], out[index_usd + 2])
     rez[out[index_euro]] = (out[index_euro + 1], out[index_euro + 2])
     rez[out[index_rub]] = (out[index_rub + 1], out[index_rub + 2])
-
+    temp_date = []
+    for data_element in out:
+        if re.match('\d\d.\d\d.\d\d',data_element):
+            temp_date.append(data_element)
+    rez['today'] = temp_date[0]
+    rez['tomorrow'] = temp_date[1]
     return rez
