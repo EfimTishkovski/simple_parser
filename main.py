@@ -107,15 +107,15 @@ class Main_window(QWidget):
                     self.rub_sale.setText(data['rub'][1])
                     self.messege_label.setText(f"Готово {data['date']} ВТБ")
                 else:
-                    self.messege_label.setText('Ошибка1')
+                    self.messege_label.setText('Ошибка')
         except:
-            self.messege_label.setText('Ошибка2')
+            self.messege_label.setText('Ошибка')
     def __init__(self):
         super(Main_window, self).__init__()
         loadUi('Form.ui', self)
 
         self.messege_label.setText('')                         # Сброс сообщения при запуске
-        self.show_data()                                       # Получение первойстроки комбобокса
+        self.show_data()                                       # Получение первой строки комбобокса
         self.comboBox.activated[str].connect(self.show_data)   # Обработка сигнала смены строки комбобокса
         self.refresh_button.clicked.connect(self.show_data)    # Обработчик кнопки "обновить"
 

@@ -90,14 +90,6 @@ def get_content_nb(html):
     return rez
 # ВТБ
 def get_content_vtb(URL, headers):
-    """
-    # Заголовки необходимые для корректного доступа на сайт
-    headers = {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36'
-    }
-    url_vtb = 'https://www.vtb.by/sites/default/files/rates.xml'  # Ссылка на сайт ВТБ
-    """
 
     filename = 'rates.xml'
     html_data = requests.get(URL, headers=headers)
