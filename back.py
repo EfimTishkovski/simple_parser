@@ -88,3 +88,32 @@ def get_content_nb(html):
     rez['today'] = temp_date[0]
     rez['tomorrow'] = temp_date[1]
     return rez
+# ВТБ
+def get_content_vtb(html):
+    # Заголовки необходимые для корректного доступа на сайт
+    headers = {
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36'
+    }
+    url_vtb = 'https://www.vtb.by/sites/default/files/rates.xml'  # Ссылка на сайт ВТБ
+
+    filename = 'rates.xml'
+    html_data = requests.get(url_vtb, headers=headers)
+    file = open(filename, 'wb')
+    file.write(html_data.content)
+    file.close()
+    # получение даты из XML файла
+    file_xml = open(filename, 'r').read(80)
+    date_begin = file_xml.find('date')
+    date = file_xml[date_begin + 6: date_begin + 16]
+    # Поиск того что надо
+    content = BeautifulSoup(html_data.text, 'html.parser')
+    buy_item = content.find_all('buy')
+    sale_item = content.find_all('sell')
+    # Формирования словаря с данными
+    output = {}
+    output['date'] = date
+    output['usd'] = buy_item[0].text, sale_item[0].text
+    output['eur'] = buy_item[2].text, sale_item[2].text
+    output['rub'] = buy_item[4].text, sale_item[4].text
+    return output

@@ -179,6 +179,11 @@ background-color: rgb(255, 255, 255);</string>
      <string>Национальный банк РБ</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>ВТБ</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label_8">
    <property name="geometry">
