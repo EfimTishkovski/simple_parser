@@ -93,12 +93,23 @@ class Main_window(QWidget):
             if enable_bank == 'ВТБ':
                 answer_vtb = get_html(url_vtb, headers=headers_vtb)
                 if answer_vtb.status_code == 200:
-                    data = get_content_vtb()
-                    print(data)
+                    data = get_content_vtb(url_vtb, headers_vtb)
+                    self.buy.setText('Покупка')
+                    self.sale.setText('Продажа')
+                    # Отображение курса доллара
+                    self.usd_buy.setText(data['usd'][0])
+                    self.usd_sale.setText(data['usd'][1])
+                    # Отображение курса евро
+                    self.euro_buy.setText(data['eur'][0])
+                    self.euro_sale.setText(data['eur'][1])
+                    # Отображение курса российского рубля
+                    self.rub_buy.setText(data['rub'][0])
+                    self.rub_sale.setText(data['rub'][1])
+                    self.messege_label.setText(f"Готово {data['date']} ВТБ")
                 else:
-                    self.messege_label.setText('Ошибка')
+                    self.messege_label.setText('Ошибка1')
         except:
-            self.messege_label.setText('Ошибка')
+            self.messege_label.setText('Ошибка2')
     def __init__(self):
         super(Main_window, self).__init__()
         loadUi('Form.ui', self)
