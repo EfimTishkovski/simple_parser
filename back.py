@@ -2,6 +2,8 @@
 
 import requests
 from bs4 import BeautifulSoup
+import re
+
 """
 url_bel_b = 'https://belarusbank.by/' # Ссылка на сайт Беларусьбанка
 
@@ -79,5 +81,33 @@ def get_content_nb(html):
     rez[out[index_usd]] = (out[index_usd + 1], out[index_usd + 2])
     rez[out[index_euro]] = (out[index_euro + 1], out[index_euro + 2])
     rez[out[index_rub]] = (out[index_rub + 1], out[index_rub + 2])
-
+    temp_date = []
+    for data_element in out:
+        if re.match('\d\d.\d\d.\d\d',data_element):
+            temp_date.append(data_element)
+    rez['today'] = temp_date[0]
+    rez['tomorrow'] = temp_date[1]
     return rez
+# ВТБ
+def get_content_vtb(URL, headers):
+
+    filename = 'rates.xml'
+    html_data = requests.get(URL, headers=headers)
+    file = open(filename, 'wb')
+    file.write(html_data.content)
+    file.close()
+    # получение даты из XML файла
+    file_xml = open(filename, 'r').read(80)
+    date_begin = file_xml.find('date')
+    date = file_xml[date_begin + 6: date_begin + 16]
+    # Поиск того что надо
+    content = BeautifulSoup(html_data.text, 'html.parser')
+    buy_item = content.find_all('buy')
+    sale_item = content.find_all('sell')
+    # Формирования словаря с данными
+    output = {}
+    output['date'] = date
+    output['usd'] = buy_item[0].text, sale_item[0].text
+    output['eur'] = buy_item[2].text, sale_item[2].text
+    output['rub'] = buy_item[4].text, sale_item[4].text
+    return output
